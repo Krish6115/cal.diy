@@ -48,7 +48,7 @@ export const PriorityDialog = (
     { label: t("low"), value: 1 },
     { label: t("medium"), value: 2 },
     { label: t("high"), value: 3 },
-    { label: t("highest"), value: 4 },
+    { label: t("Highest"), value: 4 },
   ];
 
   const [newPriority, setNewPriority] = useState<{ label: string; value: number }>();
@@ -222,7 +222,7 @@ export const WeightDialog = (props: IDialog & { customClassNames?: WeightDialogC
               className={customClassNames?.weightInput?.input}
               labelClassName={customClassNames?.weightInput?.label}
               addOnClassname={customClassNames?.weightInput?.addOn}
-              label={t("Weight")}
+              label={t("weight")}
               value={newWeight}
               defaultValue={option.weight ?? 100}
               type="number"
