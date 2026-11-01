@@ -4,7 +4,7 @@ This directory contains performance tests for Cal.diy's booking flow using [Graf
 
 ## Prerequisites
 
-- [k6](https://k6.io/docs/getting-started/installation/) installed on your machine
+- [k6](https://grafana.com/docs/k6/latest/set-up/install-k6/) installed on your machine
 - Cal.diy running locally or a deployed instance to test against
 
 ## Test Structure
