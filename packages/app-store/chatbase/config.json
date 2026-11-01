@@ -4,7 +4,7 @@
   "slug": "chatbase",
   "type": "chatbase_other",
   "logo": "icon-dark.svg",
-  "url": "https://www.chatbase.co/guide/cal",
+  "url": "https://www.chatbase.co/docs/user-guides/chatbot/actions/cal",
   "variant": "other",
   "categories": [
     "other"
@@ -16,7 +16,7 @@
   "__createdUsingCli": true,
   "__template": "link-as-an-app",
   "externalLink": {
-    "url": "https://www.chatbase.co/guide/cal",
+    "url": "https://www.chatbase.co/docs/user-guides/chatbot/actions/cal",
     "newTab": true
   }
 }
