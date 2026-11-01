@@ -15,7 +15,6 @@ const HEROKU_URL = process.env.HEROKU_APP_NAME ? `https://${process.env.HEROKU_A
 const RENDER_URL = process.env.RENDER_EXTERNAL_URL ? `https://${process.env.RENDER_EXTERNAL_URL}` : "";
 export const CALCOM_ENV = process.env.CALCOM_ENV || process.env.NODE_ENV;
 export const IS_PRODUCTION = CALCOM_ENV === "production";
-export const IS_PRODUCTION_BUILD = process.env.NODE_ENV === "production";
 export const ORGANIZER_EMAIL_EXEMPT_DOMAINS = process.env.ORGANIZER_EMAIL_EXEMPT_DOMAINS || "";
 const IS_DEV = CALCOM_ENV === "development";
 export const SINGLE_ORG_SLUG = process.env.NEXT_PUBLIC_SINGLE_ORG_SLUG;
@@ -70,7 +69,6 @@ const CAL_DOMAINS = [".cal.com", ".cal.dev", ".cal.eu", ".cal.qa"];
 const WEBAPP_HOSTNAME = new URL(WEBAPP_URL).hostname;
 export const IS_SELF_HOSTED = !CAL_DOMAINS.some((domain) => WEBAPP_HOSTNAME.endsWith(domain));
 export const EMBED_LIB_URL = process.env.NEXT_PUBLIC_EMBED_LIB_URL || `${WEBAPP_URL}/embed/embed.js`;
-export const TRIAL_LIMIT_DAYS = 14;
 export const MAX_SEATS_PER_TIME_SLOT = 1000;
 
 /** Maximum duration allowed for an event in minutes (24 hours) */
@@ -109,10 +107,8 @@ export const MSTILE_ICON = "/mstile-150x150.png";
 export const ANDROID_CHROME_ICON_192 = "/android-chrome-192x192.png";
 export const ANDROID_CHROME_ICON_256 = "/android-chrome-256x256.png";
 export const ROADMAP = "https://cal.com/roadmap";
-export const DESKTOP_APP_LINK = "https://cal.com/download";
 export const POWERED_BY_URL = "https://go.cal.com/booking";
 export const DOCS_URL = "https://cal.com/docs";
-export const DEVELOPER_DOCS = "https://developer.cal.com";
 export const SEO_IMG_DEFAULT = `${CAL_URL}/og-image.png`;
 // The Dynamic OG Image is passed through Next's Image API to further optimize it.
 // This results in a 80% smaller image 🤯. It is however important that for the query
@@ -139,10 +135,6 @@ export const ENABLE_PROFILE_SWITCHER = process.env.NEXT_PUBLIC_ENABLE_PROFILE_SW
 export const ALLOWED_HOSTNAMES = JSON.parse(`[${process.env.ALLOWED_HOSTNAMES || ""}]`) as string[];
 export const RESERVED_SUBDOMAINS = JSON.parse(`[${process.env.RESERVED_SUBDOMAINS || ""}]`) as string[];
 
-export const ORGANIZATION_SELF_SERVE_PRICE = parseFloat(
-  process.env.NEXT_PUBLIC_ORGANIZATIONS_SELF_SERVE_PRICE_NEW || "37"
-);
-
 // Needed for emails in E2E
 export const IS_MAILHOG_ENABLED = process.env.E2E_TEST_MAILHOG_ENABLED === "1";
 export const CALCOM_VERSION = process.env.NEXT_PUBLIC_CALCOM_VERSION as string;
@@ -167,9 +159,6 @@ export const IS_PREMIUM_USERNAME_ENABLED =
   (IS_CALCOM || (process.env.NEXT_PUBLIC_IS_E2E && IS_STRIPE_ENABLED)) &&
   process.env.NEXT_PUBLIC_STRIPE_PREMIUM_PLAN_PRICE_MONTHLY;
 
-// Max number of invites to join a team/org that can be sent at once
-export const MAX_NB_INVITES = 100;
-
 export const URL_PROTOCOL_REGEX = /(^\w+:|^)\/\//;
 
 export const IS_VISUAL_REGRESSION_TESTING = Boolean(globalThis.window?.Meticulous?.isRunningAsTest);
@@ -181,9 +170,6 @@ export const BOOKER_NUMBER_OF_DAYS_TO_LOAD = parseInt(
 
 export const CLOUDFLARE_SITE_ID = process.env.NEXT_PUBLIC_CLOUDFLARE_SITEKEY;
 export const CLOUDFLARE_USE_TURNSTILE_IN_BOOKER = process.env.NEXT_PUBLIC_CLOUDFLARE_USE_TURNSTILE_IN_BOOKER;
-export const ORG_SELF_SERVE_ENABLED = process.env.NEXT_PUBLIC_ORG_SELF_SERVE_ENABLED === "1";
-export const ORG_MINIMUM_PUBLISHED_TEAMS_SELF_SERVE = 0;
-export const ORG_MINIMUM_PUBLISHED_TEAMS_SELF_SERVE_HELPER_DIALOGUE = 1;
 
 export const CALCOM_PRIVATE_API_ROUTE = process.env.CALCOM_PRIVATE_API_ROUTE || "https://goblin.cal.com";
 export const WEBSITE_PRIVACY_POLICY_URL =
@@ -221,11 +207,6 @@ export const GOOGLE_CALENDAR_SCOPES = [
   "https://www.googleapis.com/auth/calendar.readonly",
 ];
 export const DIRECTORY_IDS_TO_LOG = process.env.DIRECTORY_IDS_TO_LOG?.split(",") || [];
-export const SCANNING_WORKFLOW_STEPS = !!(!IS_SELF_HOSTED && process.env.IFFY_API_KEY);
-
-// Cloudflare URL Scanner - checks URLs for malicious content in workflows and event types
-export const URL_SCANNING_ENABLED =
-  !!process.env.CLOUDFLARE_URL_SCANNER_API_TOKEN && !!process.env.CLOUDFLARE_ACCOUNT_ID;
 
 export const IS_DUB_REFERRALS_ENABLED =
   !!process.env.NEXT_PUBLIC_DUB_PROGRAM_ID && process.env.NEXT_PUBLIC_DUB_PROGRAM_ID !== "";
@@ -235,19 +216,11 @@ export const DUB_SMS_FOLDER_ID = process.env.DUB_SMS_FOLDER_ID;
 
 export const CAL_VIDEO_MEETING_LINK_FOR_TESTING = process.env.CAL_VIDEO_MEETING_LINK_FOR_TESTING;
 
-export const IS_SMS_CREDITS_ENABLED =
-  !!process.env.NEXT_PUBLIC_STRIPE_CREDITS_PRICE_ID || !!process.env.NEXT_PUBLIC_IS_E2E;
 export const DATABASE_CHUNK_SIZE = parseInt(process.env.DATABASE_CHUNK_SIZE || "25", 10);
 
 export const NEXTJS_CACHE_TTL = 3600; // 1 hour
 
 export const DEFAULT_GROUP_ID = "default_group_id";
-
-const _rawCalAiPrice = process.env.NEXT_PUBLIC_CAL_AI_PHONE_NUMBER_MONTHLY_PRICE;
-export const CAL_AI_PHONE_NUMBER_MONTHLY_PRICE = (() => {
-  const parsed = _rawCalAiPrice && _rawCalAiPrice.trim() !== "" ? Number(_rawCalAiPrice) : NaN;
-  return Number.isFinite(parsed) ? parsed : 5;
-})();
 
 // Retell AI test mode configuration
 export const RETELL_AI_TEST_MODE = process.env.RETELL_AI_TEST_MODE === "true";
@@ -269,10 +242,6 @@ export const ENV_PAST_BOOKING_RESCHEDULE_CHANGE_TEAM_IDS =
 // Cal Video (Daily) app identifiers
 export const CAL_VIDEO = "daily-video";
 export const CAL_VIDEO_TYPE = "daily_video";
-
-export const ORG_TRIAL_DAYS = process.env.STRIPE_ORG_TRIAL_DAYS
-  ? Math.max(0, parseInt(process.env.STRIPE_ORG_TRIAL_DAYS, 10))
-  : null;
 
 export const IS_API_V2_E2E = process.env.IS_E2E === "true";
 
