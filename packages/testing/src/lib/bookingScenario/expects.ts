@@ -81,7 +81,6 @@ type ExpectedEmail = {
   appsStatus?: AppsStatus[];
 };
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace jest {
     interface Matchers<R> {
       toHaveEmail(expectedEmail: ExpectedEmail, to: string, subject?: string): R;
@@ -179,7 +178,6 @@ expect.extend({
       if (!icsKey) throw new Error("icsKey not found");
       return {
         pass: false,
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-expect-error
         actual: icsObject[icsKey].uid!,
         expected: expectedEmail.ics?.iCalUID,
@@ -1258,15 +1256,11 @@ export function expectSuccessfulCalendarEventDeletionInCalendar(
 
 export function expectSuccessfulVideoMeetingCreation(
   videoMock: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     createMeetingCalls: any[];
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     updateMeetingCalls: any[];
   },
   expected: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     credential: any;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     calEvent: any;
   }
 ) {
@@ -1282,13 +1276,10 @@ export function expectSuccessfulVideoMeetingCreation(
 
 export function expectSuccessfulVideoMeetingUpdationInCalendar(
   videoMock: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     createMeetingCalls: any[];
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     updateMeetingCalls: any[];
   },
   expected: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     bookingRef: any;
     calEvent: Partial<CalendarEvent>;
   }
@@ -1303,15 +1294,11 @@ export function expectSuccessfulVideoMeetingUpdationInCalendar(
 
 export function expectSuccessfulVideoMeetingDeletionInCalendar(
   videoMock: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     createMeetingCalls: any[];
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     updateMeetingCalls: any[];
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     deleteMeetingCalls: any[];
   },
   expected: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     bookingRef: any;
   }
 ) {
@@ -1321,7 +1308,6 @@ export function expectSuccessfulVideoMeetingDeletionInCalendar(
   expect(bookingRefUid).toEqual(expected.bookingRef.uid);
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function expectBookingInDBToBeRescheduledFromTo({ from, to }: { from: any; to: any }) {
   // Expect previous booking to be cancelled
   await expectBookingToBeInDatabase({

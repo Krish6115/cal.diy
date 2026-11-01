@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import i18nMock from "../__mocks__/libServerI18n";
 import prismock from "../__mocks__/prisma";
 import type { TFunction } from "i18next";
@@ -639,13 +637,11 @@ export async function addBookings(bookings: InputBooking[]) {
   });
 
   await addBookingsToDb(
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-expect-error
     allBookings.map((booking) => {
       const bookingCreate = booking;
       if (booking.references) {
         bookingCreate.references = {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           //@ts-expect-error
           createMany: {
             data: booking.references,
@@ -654,7 +650,6 @@ export async function addBookings(bookings: InputBooking[]) {
       }
       if (booking.attendees) {
         bookingCreate.attendees = {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           //@ts-expect-error
           createMany: {
             data: booking.attendees.map((attendee) => {
@@ -676,7 +671,6 @@ export async function addBookings(bookings: InputBooking[]) {
 
       if (booking?.user?.id) {
         bookingCreate.user = {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           //@ts-expect-error
           connect: {
             id: booking.user.id,
@@ -818,7 +812,6 @@ export async function addUsers(users: InputUser[]) {
     const user = users[i];
     if (user.schedules) {
       newUser.schedules = {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-expect-error
         createMany: {
           data: user.schedules.map((schedule) => {
@@ -836,7 +829,6 @@ export async function addUsers(users: InputUser[]) {
     }
     if (user.credentials) {
       newUser.credentials = {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-expect-error
         createMany: {
           data: user.credentials,
@@ -847,7 +839,6 @@ export async function addUsers(users: InputUser[]) {
     if (user.teams) {
       const addedTeams = await addTeamsToDb(user.teams.map((team) => team.team));
       newUser.teams = {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-expect-error
         createMany: {
           data: user.teams.map((team, index) => {
@@ -861,7 +852,6 @@ export async function addUsers(users: InputUser[]) {
     }
     if (user.selectedCalendars) {
       newUser.selectedCalendars = {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-expect-error
         createMany: {
           data: user.selectedCalendars,
@@ -870,7 +860,6 @@ export async function addUsers(users: InputUser[]) {
     }
     if (user.destinationCalendar) {
       newUser.destinationCalendar = {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-expect-error
         create: user.destinationCalendar,
       };

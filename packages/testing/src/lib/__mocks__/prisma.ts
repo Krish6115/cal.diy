@@ -12,7 +12,6 @@ vi.stubEnv("DATABASE_URL", "postgresql://user:password@localhost:5432/testdb");
 const handlePrismockBugs = (prismock: any) => {
   const __findManyWebhook = prismock.webhook.findMany;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   prismock.webhook.findMany = (...rest: any[]) => {
     // There is some bug in prismock where it can't handle complex where clauses
     if (rest[0].where?.OR && rest[0].where.AND) {

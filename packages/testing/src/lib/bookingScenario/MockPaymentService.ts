@@ -15,7 +15,6 @@ export function getMockPaymentService() {
   const paymentUid = "MOCK_PAYMENT_UID";
   const externalId = "mock_payment_external_id";
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
   class MockPaymentService implements IAbstractPaymentService {
     // TODO: We shouldn't need to implement adding a row to Payment table but that's a requirement right now.
